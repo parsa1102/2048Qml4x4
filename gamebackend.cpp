@@ -25,8 +25,8 @@ void gameBackend::makeGameState()
 
 bool gameBackend::luck()
 {
-    qint64 rand = QRandomGenerator::global()->bounded(3);
-    if(rand == 2)
+    qint64 rand = QRandomGenerator::global()->bounded(2);
+    if(rand == 1)
         return true;
     return false;
 }
@@ -36,9 +36,9 @@ void gameBackend::righClicked()
 {
     for(int j=0;j<4;j++){
         bool moveOccured = false;
-        qInfo()<<"j"<<QString::number(j);
+        //qInfo()<<"j"<<QString::number(j);
         for(int i=0;i<3;i++){
-            qInfo()<<QString::number(i);
+            //qInfo()<<QString::number(i);
             if(gameState[j][i] == gameState[j][i+1] && gameState[j][i] != 0){
                 gameState[j][i]=0;
                 gameState[j][i+1] *= 2;
@@ -55,7 +55,7 @@ void gameBackend::righClicked()
                 }
             }
         }
-        if(gameState[j][0] == 0 && moveOccured){
+        if(gameState[j][0] == 0){
             if(luck()){
                 for(int i=3;i>=0;i--){
                     if(gameState[j][i] == 0){
@@ -73,9 +73,9 @@ void gameBackend::leftClicked()
 {
     for(int j=0;j<4;j++){
         bool moveOccured = false;
-        qInfo()<<"j"<<QString::number(j);
+        //qInfo()<<"j"<<QString::number(j);
         for(int i=3;i>=1;i--){
-            qInfo()<<QString::number(i);
+            //qInfo()<<QString::number(i);
             if(gameState[j][i] == gameState[j][i-1] && gameState[j][i] != 0){
                 gameState[j][i]=0;
                 gameState[j][i-1] *= 2;
@@ -104,7 +104,7 @@ void gameBackend::leftClicked()
                 }
             }
         }
-        if(gameState[j][0] == 0 && moveOccured){
+        if(gameState[j][0] == 0){
             if(luck()){
                 for(int i=0;i<4;i++){
                     if(gameState[j][i] == 0){
@@ -139,7 +139,7 @@ void gameBackend::upClicked()
                 }
             }
         }
-        if(gameState[3][j] == 0 && moveOccured){
+        if(gameState[3][j] == 0){
             if(luck()){
                 bool flag = false;
                 for(int i=3;i>=0;i--){
@@ -177,9 +177,10 @@ void gameBackend::downClicked()
                 }
             }
         }
-        if(gameState[0][j] == 0 && moveOccured){
+        if(gameState[0][j] == 0){
             if(luck()){
                 bool flag = false;
+                qInfo()<<"here we are";
                 for(int i=0;i<4;i++){
                     if(gameState[i][j] != 0){
                         gameState[i-1][j] = 2;
